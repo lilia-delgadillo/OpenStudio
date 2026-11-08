@@ -38,4 +38,4 @@ If using a single-configuration generator, the executable may instead be under
 
 ## Credits
 
-Lilia D. (brady-delgadillo) - Dev / Founder
+Lilia D. (lilia-delgadillo) - Dev / Founder
