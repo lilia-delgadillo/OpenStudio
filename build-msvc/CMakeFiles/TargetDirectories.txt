@@ -1,0 +1,3 @@
+C:/Users/delga/Desktop/StudioCore_V0.1_Starter/build-msvc/CMakeFiles/OpenStudio.dir
+C:/Users/delga/Desktop/StudioCore_V0.1_Starter/build-msvc/CMakeFiles/ALL_BUILD.dir
+C:/Users/delga/Desktop/StudioCore_V0.1_Starter/build-msvc/CMakeFiles/ZERO_CHECK.dir
