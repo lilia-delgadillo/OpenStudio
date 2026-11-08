@@ -42,7 +42,7 @@ add_executable(OpenStudio
     src/engine/ProductionEngine.cpp
     src/engine/sources/TestPatternSource.cpp
     src/ui/MainWindow.cpp
- "src/engine/sources/NDIVideoSource.h" "src/engine/sources/NDIVideoSource.cpp")
+ "src/engine/sources/NDIVideoSource.h" "src/engine/sources/NDIVideoSource.cpp" "src/graphics/GraphicsDevice.h" "src/graphics/GraphicsDevice.cpp" "src/graphics/D3D11SwapChain.h" "src/graphics/D3D11SwapChain.cpp" "src/graphics/VideoSurface.h" "src/graphics/VideoSurface.cpp")
 
 #target_compile_definitions(OpenStudio PRIVATE NDILIB_DYNAMIC_LOAD)
 
@@ -55,6 +55,10 @@ target_link_libraries(OpenStudio PRIVATE
     Qt6::Widgets
     ${NDI_LIBRARY}
     delayimp
+
+    d3d11
+    dxgi
+    d3dcompiler
 )
 
 if(MSVC)

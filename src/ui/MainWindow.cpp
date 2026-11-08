@@ -55,7 +55,8 @@ private:
     QImage m_frame;
 };
 
-MainWindow::MainWindow(QWidget* parent)
+MainWindow::MainWindow(GraphicsDevice& graphicsDevice,
+    QWidget* parent)
     : QMainWindow(parent)
 {
     setWindowTitle(QStringLiteral("StudioCore V0.1"));
@@ -70,10 +71,15 @@ MainWindow::MainWindow(QWidget* parent)
         QStringLiteral("font-size: 18px; font-weight: 700; "
                        "color: #f2f4f8; padding: 8px;"));
 
-    m_programCanvas = new VideoCanvas(central);
+    m_programCanvas = new VideoSurface(graphicsDevice);
+
+    QWidget* videoContainer =
+        QWidget::createWindowContainer(m_programCanvas, central);
+
+    videoContainer->setMinimumSize(640, 360);
 
     layout->addWidget(header);
-    layout->addWidget(m_programCanvas, 1);
+    layout->addWidget(videoContainer, 1);
     central->setStyleSheet(QStringLiteral("background-color: #202630;"));
     setCentralWidget(central);
 
@@ -108,7 +114,6 @@ void MainWindow::updateFrame()
 
     // 2. Only process and calculate FPS if we actually got a valid new frame
     if (frame.isValid()) {
-        m_programCanvas->setFrame(frame.image);
 
         auto now = std::chrono::steady_clock::now();
 

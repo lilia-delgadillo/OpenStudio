@@ -7,6 +7,9 @@
 
 #include <chrono>
 
+#include "../graphics/GraphicsDevice.h"
+#include "../graphics/VideoSurface.h"
+
 class VideoCanvas;
 
 class MainWindow final : public QMainWindow
@@ -14,7 +17,7 @@ class MainWindow final : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget* parent = nullptr);
+    explicit MainWindow(GraphicsDevice& graphicsDevice, QWidget* parent = nullptr);
     ~MainWindow() override;
 
 private slots:
@@ -23,7 +26,7 @@ private slots:
 private:
     ProductionEngine m_engine;
     QTimer m_frameTimer;
-    VideoCanvas* m_programCanvas = nullptr;
+    VideoSurface* m_programCanvas = nullptr;
 
     std::chrono::steady_clock::time_point m_lastFrameTime;
     bool m_isFirstFrame = true;

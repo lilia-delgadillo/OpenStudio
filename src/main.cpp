@@ -4,11 +4,15 @@
 #include "ui/MainWindow.h"
 
 #include "engine/video/NDI/NDIMain.h"
+#include "graphics/GraphicsDevice.h"
 
 // 1. Move all C++ objects into an isolated function so their destructors handle safely
 int RunQtApplication(int argc, char* argv[]) {
+
+    GraphicsDevice graphicsDevice;
+
     QApplication a(argc, argv);
-    MainWindow w;
+    MainWindow w(graphicsDevice);
     w.show();
     return a.exec();
 }
