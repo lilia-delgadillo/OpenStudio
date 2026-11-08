@@ -16,7 +16,7 @@ int RunQtApplication(int argc, char* argv[]) {
 // 2. Keep main() completely clean of C++ objects so __try works without conflict
 int main(int argc, char* argv[]) {
     __try {
-        std::cout << "OpenStudio is starting up..." << std::endl;
+        std::cout << "OpenStudio 1 is starting up..." << std::endl;
 
         NDI::getNDI().StartupNDIManager();
         NDI::getNDI().NDI_init();
