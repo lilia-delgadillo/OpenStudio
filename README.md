@@ -1,17 +1,11 @@
-# StudioCore V0.1 Starter
+# OpenStudio 1
 
-A small Windows-first C++20 / Qt 6 starter for the StudioCore live-production project.
+Open source broadcast switching software based in C++ 20 and Qt 6.5
 
-## Current checkpoint
+## Current Features
 
-- Qt 6 desktop application
-- `ProductionEngine` owns an abstract `IVideoSource`
-- `TestPatternSource` generates 1280x720 frames
-- Program preview canvas displays the generated frames
-
-This is intentionally a CPU-backed prototype. It validates the source/engine/UI boundary
-before adding the Direct3D 11 renderer and NDI SDK. It is not yet a production video
-pipeline and does not yet implement Preview/Program switching.
+- NDI 5 source discovery and rendering
+- PRGM display
 
 ## Requirements
 
@@ -19,14 +13,16 @@ pipeline and does not yet implement Preview/Program switching.
 - Visual Studio 2022 with the Desktop development with C++ workload
 - CMake 3.21+
 - Qt 6.5+ with an MSVC 2022 kit
+- NDI 5+ SDK (For Development) or NDI Tools 5+ (For use)
 
 ## Configure and build
 
 Open a Developer PowerShell for VS 2022, then from this directory:
 
 ```powershell
-cmake -S . -B build -DCMAKE_PREFIX_PATH="C:/Qt/6.x.x/msvc2022_64"
-cmake --build build --config Debug
+cmake -B build-msvc
+cmake --build build-msvc --config debug
+"C:\Qt\6.12.0\msvc2022_64\bin\windeployqt.exe" --debug ".\build-msvc\Debug\OpenStudio.exe"
 ```
 
 Replace the Qt path with the actual location of your Qt MSVC installation.
@@ -40,10 +36,6 @@ Run:
 If using a single-configuration generator, the executable may instead be under
 `build/StudioCore.exe`.
 
-## Next checkpoint
+## Credits
 
-1. Add a separate Preview channel and source selection.
-2. Add CUT to copy Preview's selected source to Program.
-3. Add a source list and basic status indicators.
-4. Replace the prototype image path with a Direct3D 11 texture pipeline.
-5. Add NDI input and output adapters.
+Lilia D. (brady-delgadillo) - Dev / Founder
