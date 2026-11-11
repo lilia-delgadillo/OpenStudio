@@ -42,7 +42,7 @@ add_executable(OpenStudio
     src/engine/ProductionEngine.cpp
 #    src/engine/sources/TestPatternSource.cpp
     src/ui/MainWindow.cpp
- "src/engine/sources/NDIVideoSource.h" "src/engine/sources/NDIVideoSource.cpp" "src/graphics/GraphicsDevice.h" "src/graphics/GraphicsDevice.cpp" "src/graphics/D3D11SwapChain.h" "src/graphics/D3D11SwapChain.cpp" "src/graphics/VideoSurface.h" "src/graphics/VideoSurface.cpp" "src/graphics/D3D11Texture.cpp" "src/graphics/D3D11Shader.h" "src/graphics/D3D11Shader.cpp" "src/graphics/D3D11VideoRenderer.h" "src/graphics/D3D11VideoRenderer.cpp")
+ "src/engine/sources/NDIVideoSource.h" "src/engine/sources/NDIVideoSource.cpp" "src/graphics/GraphicsDevice.h" "src/graphics/GraphicsDevice.cpp" "src/graphics/D3D11SwapChain.h" "src/graphics/D3D11SwapChain.cpp" "src/graphics/VideoSurface.h" "src/graphics/VideoSurface.cpp" "src/graphics/D3D11Texture.cpp" "src/graphics/D3D11Shader.h" "src/graphics/D3D11Shader.cpp" "src/graphics/D3D11VideoRenderer.h" "src/graphics/D3D11VideoRenderer.cpp" "src/engine/video/NDI/NDIMain.cpp")
 
 #target_compile_definitions(OpenStudio PRIVATE NDILIB_DYNAMIC_LOAD)
 
