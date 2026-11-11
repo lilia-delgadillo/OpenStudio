@@ -3,6 +3,12 @@
 #include <stdexcept>
 #include <string>
 
+/// <summary>
+/// Creates and initializes the shared Direct3D 11 graphics device and immediate device context.
+/// </summary>
+/// <exception cref="std::runtime_error">
+/// Thrown if Direct3D 11 device initialization fails.
+/// </exception>
 GraphicsDevice::GraphicsDevice()
 {
 	D3D_FEATURE_LEVEL featureLevel;
@@ -34,7 +40,7 @@ GraphicsDevice::GraphicsDevice()
         );
     }
 }
-
+// Unimplimented
 GraphicsDevice::~GraphicsDevice()
 {
 }

@@ -3,6 +3,9 @@
 #include <d3d11.h>
 #include <wrl/client.h>
 
+/// <summary>
+/// Manages the Shared Graphics Device
+/// </summary>
 class GraphicsDevice
 {
 public:
