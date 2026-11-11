@@ -10,8 +10,6 @@
 #include "../graphics/GraphicsDevice.h"
 #include "../graphics/VideoSurface.h"
 
-class VideoCanvas;
-
 class MainWindow final : public QMainWindow
 {
     Q_OBJECT

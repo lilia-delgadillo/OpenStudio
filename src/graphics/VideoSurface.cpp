@@ -27,6 +27,15 @@ void VideoSurface::InitializeSwapChain()
         return;
 
     m_swapChain = std::move(swapChain);
+
+    auto renderer = std::make_unique<D3D11VideoRenderer>(
+        m_graphicsDevice
+    );
+
+    if (!renderer->Initialize())
+        return;
+
+    m_renderer = std::move(renderer);
 }
 
 void VideoSurface::Render()
@@ -34,7 +43,11 @@ void VideoSurface::Render()
     if (!m_swapChain)
         return;
 
-    m_swapChain->Clear(0.0f, 0.0f, 1.0f, 1.0f);
+    m_swapChain->Clear(0.0f, 0.0f, 0.0f, 1.0f);
+
+    if (m_renderer)
+        m_renderer->Render();
+
     m_swapChain->Present();
 }
 
@@ -57,5 +70,16 @@ void VideoSurface::resizeEvent(QResizeEvent* event)
         return;
 
     m_swapChain->Resize(width(), height());
+    Render();
+}
+
+void VideoSurface::UpdateFrame(const VideoFrame& frame)
+{
+    if (!m_renderer || !m_swapChain)
+        return;
+
+    if (!m_renderer->UpdateFrame(frame))
+        return;
+
     Render();
 }

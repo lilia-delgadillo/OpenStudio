@@ -3,57 +3,11 @@
 #include "../engine/sources/NDIVideoSource.h"
 
 #include <QLabel>
-#include <QPainter>
 #include <QStatusBar>
 #include <QVBoxLayout>
 #include <QWidget>
 
 #include <chrono>
-
-class VideoCanvas final : public QWidget
-{
-public:
-    explicit VideoCanvas(QWidget* parent = nullptr)
-        : QWidget(parent)
-    {
-        setMinimumSize(640, 360);
-        setStyleSheet(QStringLiteral("background-color: #101318;"));
-    }
-
-    void setFrame(const QImage& frame)
-    {
-        m_frame = frame;
-        update();
-    }
-
-protected:
-    void paintEvent(QPaintEvent*) override
-    {
-        QPainter painter(this);
-        painter.fillRect(rect(), QColor(12, 15, 20));
-
-        if (m_frame.isNull()) {
-            painter.setPen(Qt::white);
-            painter.drawText(rect(), Qt::AlignCenter,
-                             QStringLiteral("Waiting for video..."));
-            return;
-        }
-
-        const QSize scaledSize = m_frame.size().scaled(
-            size(), Qt::KeepAspectRatio);
-        const QRect target(
-            (width() - scaledSize.width()) / 2,
-            (height() - scaledSize.height()) / 2,
-            scaledSize.width(),
-            scaledSize.height());
-
-        painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
-        painter.drawImage(target, m_frame);
-    }
-
-private:
-    QImage m_frame;
-};
 
 MainWindow::MainWindow(GraphicsDevice& graphicsDevice,
     QWidget* parent)
@@ -115,6 +69,7 @@ void MainWindow::updateFrame()
     // 2. Only process and calculate FPS if we actually got a valid new frame
     if (frame.isValid()) {
 
+        m_programCanvas->UpdateFrame(frame);
         auto now = std::chrono::steady_clock::now();
 
         if (m_isFirstFrame) {

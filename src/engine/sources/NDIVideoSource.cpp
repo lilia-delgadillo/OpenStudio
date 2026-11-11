@@ -37,21 +37,29 @@ VideoFrame NDIVideoSource::acquireFrame()
 	switch (NDIlib_recv_capture_v3(reciver, &video_frame, &audio_frame, &metadata_frame, 0)) {
 
 	case NDIlib_frame_type_video:
-		if (video_frame.p_data == nullptr) return VideoFrame();
+		if (video_frame.p_data == nullptr) {
+			NDIlib_recv_free_video_v2(reciver, &video_frame);
+			return {};
+		}
 
 		if (video_frame.FourCC == NDIlib_FourCC_video_type_BGRA || video_frame.FourCC == NDIlib_FourCC_type_BGRX) {
-			QImage img(
-				reinterpret_cast<const uchar*>(video_frame.p_data),
-				video_frame.xres,
-				video_frame.yres,
-				video_frame.line_stride_in_bytes,
-				QImage::Format_ARGB32
-			);
-
+			
 			VideoFrame frame;
-			frame.image = std::move(img.copy());
+			frame.width = video_frame.xres;
+			frame.height = video_frame.yres;
+			frame.stride = video_frame.line_stride_in_bytes;
+			if (video_frame.FourCC == NDIlib_FourCC_video_type_BGRA)
+				frame.format = VideoFrame::PixelFormat::BGRA8;
+			else
+				frame.format = VideoFrame::PixelFormat::BGRX8;
+
 			frame.sequenceNumber = m_sequenceNumber++;
 			frame.timestampMs = QDateTime::currentMSecsSinceEpoch();
+
+			frame.pixels.assign(
+				video_frame.p_data,
+				video_frame.p_data + (video_frame.line_stride_in_bytes * video_frame.yres)
+			);
 
 			NDIlib_recv_free_video_v2(reciver, &video_frame);
 			return frame;

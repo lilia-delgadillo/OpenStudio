@@ -102,6 +102,18 @@ void D3D11SwapChain::Clear(float r, float g, float b, float a)
         m_renderTarget.GetAddressOf(),
         nullptr
     );
+    RECT rect{};
+    GetClientRect(m_window, &rect);
+
+    D3D11_VIEWPORT viewport{};
+    viewport.TopLeftX = 0.0f;
+    viewport.TopLeftY = 0.0f;
+    viewport.Width = static_cast<float>(rect.right - rect.left);
+    viewport.Height = static_cast<float>(rect.bottom - rect.top);
+    viewport.MinDepth = 0.0f;
+    viewport.MaxDepth = 1.0f;
+
+    context->RSSetViewports(1, &viewport);
 
     float color[4] = { r, g, b, a };
 

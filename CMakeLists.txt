@@ -40,11 +40,21 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Widgets)
 add_executable(OpenStudio
     src/main.cpp
     src/engine/ProductionEngine.cpp
-    src/engine/sources/TestPatternSource.cpp
+#    src/engine/sources/TestPatternSource.cpp
     src/ui/MainWindow.cpp
- "src/engine/sources/NDIVideoSource.h" "src/engine/sources/NDIVideoSource.cpp" "src/graphics/GraphicsDevice.h" "src/graphics/GraphicsDevice.cpp" "src/graphics/D3D11SwapChain.h" "src/graphics/D3D11SwapChain.cpp" "src/graphics/VideoSurface.h" "src/graphics/VideoSurface.cpp")
+ "src/engine/sources/NDIVideoSource.h" "src/engine/sources/NDIVideoSource.cpp" "src/graphics/GraphicsDevice.h" "src/graphics/GraphicsDevice.cpp" "src/graphics/D3D11SwapChain.h" "src/graphics/D3D11SwapChain.cpp" "src/graphics/VideoSurface.h" "src/graphics/VideoSurface.cpp" "src/graphics/D3D11Texture.cpp" "src/graphics/D3D11Shader.h" "src/graphics/D3D11Shader.cpp" "src/graphics/D3D11VideoRenderer.h" "src/graphics/D3D11VideoRenderer.cpp")
 
 #target_compile_definitions(OpenStudio PRIVATE NDILIB_DYNAMIC_LOAD)
+
+add_custom_command(TARGET OpenStudio POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${CMAKE_SOURCE_DIR}/shaders"
+        "$<TARGET_FILE_DIR:OpenStudio>/shaders"
+)
+
+set_property(TARGET OpenStudio PROPERTY
+    VS_DEBUGGER_WORKING_DIRECTORY "$<TARGET_FILE_DIR:OpenStudio>"
+)
 
 target_include_directories(OpenStudio PRIVATE 
     src
