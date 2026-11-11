@@ -6,6 +6,9 @@
 
 #include "GraphicsDevice.h"
 
+/// <summary>
+/// Manages compilation, storage, and binding of Direct3D 11 shaders.
+/// </summary>
 class D3D11Shader final
 {
 public:

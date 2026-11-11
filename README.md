@@ -4,6 +4,7 @@ Open source broadcast switching software based in C++ 20 and Qt 6.5
 
 ## Current Features
 
+- DirectX 11 Rendering Pipeline
 - NDI 5 source discovery and rendering
 - PRGM display
 
@@ -39,3 +40,7 @@ If using a single-configuration generator, the executable may instead be under
 ## Credits
 
 Lilia D. (lilia-delgadillo) - Dev / Founder
+
+### Brands
+
+NDI® is a registered trademark of Vizrt NDI AB - [NDI](https://ndi.video) 

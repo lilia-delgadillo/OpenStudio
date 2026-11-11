@@ -1,10 +1,19 @@
 #include "D3D11Shader.h"
 
+/// <summary>
+/// Initializes the shader manager with a reference to the shared graphics device.
+/// </summary>
+/// <param name="graphicsDevice">- The Direct3D 11 graphics device.</param>
 D3D11Shader::D3D11Shader(GraphicsDevice& graphicsDevice)
     : m_graphicsDevice(graphicsDevice)
 {
 }
 
+/// <summary>
+/// Compiles the .hlsl shader files for Vertex Shader
+/// </summary>
+/// <param name="filePath">- Path of the .hlsl file</param>
+/// <returns>bool - True if compilation and shader creation succeed; otherwise, false.</returns>
 bool D3D11Shader::CompileVertexShader(const wchar_t* filePath)
 {
     Microsoft::WRL::ComPtr<ID3DBlob> shaderBlob;
@@ -38,6 +47,11 @@ bool D3D11Shader::CompileVertexShader(const wchar_t* filePath)
     return true;
 }
 
+/// <summary>
+/// Compiles the .hlsl shader files for Pixel Shader
+/// </summary>
+/// <param name="filePath">- Path of the .hlsl file</param>
+/// <returns>bool - True if compilation and shader creation succeed; otherwise, false.</returns>
 bool D3D11Shader::CompilePixelShader(const wchar_t* filePath)
 {
     Microsoft::WRL::ComPtr<ID3DBlob> shaderBlob;
@@ -71,6 +85,9 @@ bool D3D11Shader::CompilePixelShader(const wchar_t* filePath)
     return true;
 }
 
+/// <summary>
+/// Binds the compiled vertex and pixel shaders to the Direct3D 11 pipeline.
+/// </summary>
 void D3D11Shader::Bind()
 {
     m_graphicsDevice.GetContext()->VSSetShader(m_vertexShader.Get(), nullptr, 0);
